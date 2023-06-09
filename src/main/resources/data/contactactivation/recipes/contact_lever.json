@@ -1,0 +1,26 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "ROL",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:stone"
+        },
+        "R": {
+            "item": "minecraft:repeater"
+        },
+        "O": {
+            "item": "minecraft:observer"
+        },
+        "L": {
+            "item": "minecraft:lever"
+        }
+    },
+    "result": {
+        "item": "contactactivation:contact_lever",
+        "count": 1
+    }
+}

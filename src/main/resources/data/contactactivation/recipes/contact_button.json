@@ -1,0 +1,26 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "ROW",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:stone"
+        },
+        "R": {
+            "item": "minecraft:repeater"
+        },
+        "O": {
+            "item": "minecraft:observer"
+        },
+        "W": {
+            "tag": "minecraft:buttons"
+        }
+    },
+    "result": {
+        "item": "contactactivation:contact_button",
+        "count": 1
+    }
+}
