@@ -1,8 +1,7 @@
-package me.auoggi.contactactivation.block.custom;
+package me.auoggi.contactactivation.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -20,13 +19,11 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Random;
-
-public class ContactButton extends DirectionalBlock {
+public class ContactLever extends DirectionalBlock {
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
 
-    public ContactButton(Properties properties) {
+    public ContactLever(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.SOUTH).setValue(POWERED, Boolean.FALSE));
     }
@@ -52,20 +49,12 @@ public class ContactButton extends DirectionalBlock {
         if(!level.isClientSide) {
             BlockState state = level.getBlockState(pos);
 
-            if (!state.getValue(POWERED))
-            {
-                level.setBlockAndUpdate(pos, state.setValue(POWERED, true));
-                level.scheduleTick(pos, this, 20);
+            if(!level.getBlockTicks().hasScheduledTick(pos, state.getBlock())) {
+                level.setBlockAndUpdate(pos, state.setValue(POWERED, !state.getValue(POWERED)));
+                level.scheduleTick(pos, this, 1);
 
                 player.swing(InteractionHand.MAIN_HAND, true);
             }
-        }
-    }
-
-    @Override
-    public void tick(@NotNull BlockState blockState, ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull Random random) {
-        if(!serverLevel.isClientSide) {
-            serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(POWERED, false));
         }
     }
 
